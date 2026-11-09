@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GTU Calculus Exam – Made by Komsa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f6f7fb;--sheet:#fff;--ink:#14213d;--mute:#5a6785;--navy:#1b3f8b;--navy-ink:#fff;--rule:#cdd5e6;--ok:#1e7a4c;--okbg:#e3f4ea;--bad:#b3261e;--badbg:#fbe7e5;--gold:#b8892b;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0e1424;--sheet:#161e33;--ink:#e8ecf7;--mute:#9aa6c4;--navy:#7ea2ff;--navy-ink:#0e1424;--rule:#2a3556;--ok:#5ad196;--okbg:#14352a;--bad:#ff8f86;--badbg:#3b1a1a;--gold:#e0b85a;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#0e1424;--sheet:#161e33;--ink:#e8ecf7;--mute:#9aa6c4;--navy:#7ea2ff;--navy-ink:#0e1424;--rule:#2a3556;--ok:#5ad196;--okbg:#14352a;--bad:#ff8f86;--badbg:#3b1a1a;--gold:#e0b85a;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 "Public Sans",system-ui,"Segoe UI",sans-serif}
+.sheet{max-width:760px;margin:0 auto;background:var(--sheet);border-left:1px solid var(--rule);border-right:1px solid var(--rule);min-height:100vh}
+header.cover{padding:36px 28px 22px;text-align:center;border-bottom:4px double var(--navy)}
+.cover .ka{font:600 15px "Source Serif 4",Georgia,serif;color:var(--navy);margin:0}
+.cover h1{font:700 28px/1.2 "Source Serif 4",Georgia,serif;margin:6px 0 4px}
+.cover p{margin:2px 0;color:var(--mute)}
+.cover .meta{margin-top:14px;font-weight:600;color:var(--ink)}
+.fields{display:grid;grid-template-columns:2fr 1.5fr 1fr;gap:12px;padding:18px 28px;border-bottom:1px solid var(--rule)}
+.fields label{display:block;font-size:13px;color:var(--mute)}
+.fields input{width:100%;margin-top:3px;padding:8px 6px;border:0;border-bottom:1.5px solid var(--ink);background:transparent;color:var(--ink);font:inherit}
+.fields input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.rules{margin:0;padding:14px 28px 14px 48px;font-size:14px;color:var(--mute);border-bottom:1px solid var(--rule)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 28px;background:var(--navy);color:var(--navy-ink);font-weight:600}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:30}
+.bar button{background:transparent;color:inherit;border:1.5px solid currentColor;border-radius:4px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}
+.bar button:focus-visible,.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#clock{font-variant-numeric:tabular-nums;font-size:18px}
+#clock.low{color:#ffd27a}
+fieldset.q{border:0;margin:0;padding:22px 28px;border-bottom:1px solid var(--rule)}
+legend{float:left;width:100%;padding:0;font:600 18px/1.4 "Source Serif 4",Georgia,serif}
+legend .n{color:var(--navy);margin-right:6px}
+legend small{display:block;font:400 12px "Public Sans",sans-serif;color:var(--mute);margin-top:2px}
+.opts{clear:both;display:grid;gap:8px;padding-top:12px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--rule);border-radius:6px;cursor:pointer}
+.opt:hover{border-color:var(--navy)}
+.opt input{margin-top:5px;accent-color:var(--navy)}
+.opt b{min-width:18px;color:var(--navy)}
+.opt:has(input:checked){border-color:var(--navy);background:color-mix(in srgb,var(--navy) 10%,transparent)}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.why{display:none;margin:10px 0 0;padding:8px 12px;border-left:4px solid var(--ok);background:var(--okbg);font-size:14px}
+.show .why{display:block}
+.why.bad{border-left-color:var(--bad);background:var(--badbg)}
+.why.miss{border-left-color:var(--gold);background:var(--paper)}
+.why span{display:block}.why span+span{margin-top:6px}
+.actions{padding:26px 28px 10px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{background:var(--navy);color:var(--navy-ink);border:0;border-radius:5px;padding:12px 22px;font:600 16px "Public Sans",sans-serif;cursor:pointer}
+.btn.alt{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+#result{display:none;margin:18px 28px;padding:20px;border:2px solid var(--navy);border-radius:6px;text-align:center}
+#result .score{font:700 44px "Source Serif 4",Georgia,serif;color:var(--navy);margin:0}
+#result p{margin:4px 0}
+footer{padding:20px 28px 40px;font-size:13px;color:var(--mute);text-align:center}
+@media (max-width:560px){.fields{grid-template-columns:1fr}.cover h1{font-size:24px}.bar,.fields,fieldset.q,.actions,header.cover{padding-left:16px;padding-right:16px}.rules{padding-left:36px}#result{margin:18px 16px}}
+[hidden]{display:none!important}
+#setup{padding:22px 28px;border-bottom:1px solid var(--rule)}
+#setup h2{font:700 22px "Source Serif 4",Georgia,serif;margin:0 0 4px;color:var(--navy)}
+#setup h3{font:600 13px "Public Sans",sans-serif;margin:22px 0 8px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+.hint{margin:0;color:var(--mute);font-size:14px}
+.chips,.mini{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.chip{min-width:52px;padding:9px 14px;border:1.5px solid var(--navy);border-radius:999px;background:transparent;color:var(--navy);font:600 15px "Public Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--navy);color:var(--navy-ink)}
+.chip:disabled{opacity:.35;cursor:not-allowed}
+.chip:focus-visible,.lesson:focus-within,.sw:focus-within{outline:3px solid var(--gold);outline-offset:2px}
+.lesson,.sw{display:flex;gap:10px;align-items:center;padding:9px 12px;border:1.5px solid var(--rule);border-radius:6px;margin-bottom:6px;cursor:pointer}
+.lesson span,.sw span{flex:1}.lesson em{font-style:normal;color:var(--mute);font-size:13px}.sw small{color:var(--mute)}
+.lesson input,.sw input{accent-color:var(--navy);width:18px;height:18px}
+.lesson:has(input:checked){border-color:var(--navy)}
+#avail{margin:18px 0 12px;font-weight:600}
+#setup .btn:disabled{opacity:.4;cursor:not-allowed}
+@media (max-width:560px){#setup{padding:20px 16px}}
+@media print{.bar,.actions,body::before{display:none}}
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet">
+<header class="cover">
+<p class="ka">საქართველოს ტექნიკური უნივერსიტეტი</p>
+<h1>Georgian Technical University</h1>
+<p>Mathematics · Calculus I · Thomas’ Calculus, book pp. 1–120</p>
+<p class="meta">Multiple Choice Test · up to 60 questions · Tbilisi 2026</p>
+<p><strong>Made by Komsa</strong></p>
+</header>
+<div class="fields">
+<label>Student name<input id="nm" autocomplete="name"></label>
+<label>Faculty<input id="fc"></label>
+<label>Group #<input id="gr"></label>
+</div>
+<ol class="rules">
+<li>Choose one answer per question. Each correct answer earns 1 point.</li>
+<li>Unanswered questions score 0. There is no penalty for wrong answers.</li>
+<li>You have 2 minutes per question. The test submits itself when the timer reaches 0:00.</li>
+</ol>
+<section id="setup" aria-label="Test setup">
+<h2>Build your test</h2>
+<p class="hint">Choose how many questions and which lessons to practise. Questions are picked at random from the lessons you select.</p>
+<h3>Number of questions</h3><div class="chips" id="cnts"></div>
+<h3>Lessons</h3>
+<div class="mini"><button type="button" class="chip" id="all">Select all</button><button type="button" class="chip" id="none">Clear</button></div>
+<div id="lessons"></div>
+<h3>Shuffle</h3>
+<label class="sw"><input type="checkbox" id="shq" checked><span>Shuffle question order <small>(off = book order)</small></span></label>
+<label class="sw"><input type="checkbox" id="sha" checked><span>Shuffle answer choices</span></label>
+<p id="avail" role="status"></p>
+<button class="btn" id="go" type="button">Start test</button>
+</section>
+<div id="examwrap" hidden>
+<div class="bar"><span id="prog">Answered 0 / 20</span><span id="clock">40:00</span><button id="keybtn" type="button" aria-pressed="false">Show answer key</button></div>
+<form id="exam" onsubmit="return false"><div id="qs"></div></form>
+<div class="actions">
+<button class="btn" id="submit" type="button">Submit exam</button>
+<button class="btn alt" id="reset" type="button">Start over</button>
+</div>
+<div id="result" role="status" aria-live="polite"></div>
+</div>
+<footer><strong>Made by Komsa</strong><br>Based on Thomas’ Calculus: Early Transcendentals, 13th ed., book pages 1–120 (PDF pages 15–134): Chapter 1 Functions and Chapter 2 Limits and Continuity.</footer>
+</div>
+<script>
+var Q=[
+{t:"1.1 Functions and Their Graphs",q:"What is the domain of f(x) = √(x − 3)?",o:["All x with x ≥ 3","Only x > 3","All real numbers","All x with x ≤ 3"],a:0,w:"The square root needs x − 3 ≥ 0, so x ≥ 3. At x = 3 the value √0 = 0 is defined, so 3 is included.",x:["","At x = 3 the value is √0 = 0, which is defined, so 3 is included.","Negative values under the root have no real square root.","x ≤ 3 makes x − 3 negative, so there is no real root."]},
+{t:"1.1 Functions and Their Graphs",q:"The function f(x) = x² is:",o:["Odd","Even","Both even and odd","Neither even nor odd"],a:1,w:"f(−x) = (−x)² = x² = f(x), so f is even and its graph is symmetric about the y-axis.",x:["An odd function needs f(−x) = −f(x), but (−x)² = x², not −x².","","Only the zero function is both even and odd.","It does have a symmetry: f(−x) = f(x), so it is even."]},
+{t:"1.1 Functions and Their Graphs",q:"A curve in the xy-plane is the graph of a function exactly when:",o:["Every vertical line meets it at most once","Every horizontal line meets it at most once","It passes through the origin","It is a straight line"],a:0,w:"This is the vertical line test: each input x may have only one output y.",x:["","That is the horizontal line test, which checks for one-to-one functions.","Many functions, such as y = x² + 1, miss the origin.","Curves like y = x² are functions without being straight lines."]},
+{t:"1.2 Combining Functions",q:"If f(x) = x² + 1 and g(x) = x − 2, what is (f ∘ g)(x)?",o:["x² − 4x + 5","x² − 1","x² + x − 1","x³ − 2x² + x − 2"],a:0,w:"(f ∘ g)(x) = f(g(x)) = (x − 2)² + 1 = x² − 4x + 5.",x:["","That is (g ∘ f)(x) = (x² + 1) − 2, with the order reversed.","That is f(x) + g(x), a sum, not a composition.","That is f(x) · g(x), a product, not a composition."]},
+{t:"1.2 Shifting and Scaling Graphs",q:"The graph of y = f(x − 3) + 2 is the graph of f shifted:",o:["Right 3 and up 2","Left 3 and up 2","Right 3 and down 2","Left 3 and down 2"],a:0,w:"Replacing x by x − 3 shifts the graph right 3. Adding 2 outside shifts it up 2.",x:["","x − 3 shifts the graph right, not left.","The +2 outside the function shifts it up, not down.","Both directions are reversed."]},
+{t:"1.3 Trigonometric Functions",q:"What is 60° in radians?",o:["π/6","π/3","π/2","2π/3"],a:1,w:"Since 180° = π radians, 60° = 60π/180 = π/3.",x:["π/6 is 30°.","","π/2 is 90°.","2π/3 is 120°."]},
+{t:"1.3 Trigonometric Functions",q:"Which identity is true for every angle θ?",o:["sin²θ + cos²θ = 1","sin θ + cos θ = 1","sin 2θ = 2 sin θ","cos 2θ = 2 cos θ"],a:0,w:"sin²θ + cos²θ = 1 follows from the unit circle (x² + y² = 1) and holds for all θ.",x:["","The sum equals 1 only at special angles. At θ = π/4 it is √2.","The double-angle formula is sin 2θ = 2 sin θ cos θ.","The double-angle formula is cos 2θ = cos²θ − sin²θ."]},
+{t:"1.3 Trigonometric Functions",q:"What is the smallest period of y = sin x?",o:["π","2π","π/2","4π"],a:1,w:"sin(x + 2π) = sin x, and no smaller positive number works, so the period is 2π.",x:["π is the period of tan x, not sin x.","","sin(x + π/2) = cos x, which is a different function.","4π is a period, but not the smallest one."]},
+{t:"1.5 Exponential Functions",q:"Which law of exponents is correct (a > 0)?",o:["aˣ · aʸ = aˣ⁺ʸ","aˣ · aʸ = aˣʸ","(aˣ)ʸ = aˣ⁺ʸ","aˣ / aʸ = aˣʸ"],a:0,w:"When you multiply powers of the same base, you add the exponents.",x:["","Exponents add when multiplying like bases. They do not multiply.","A power of a power multiplies exponents: (aˣ)ʸ = aˣʸ.","Dividing like bases subtracts exponents: aˣ/aʸ = aˣ⁻ʸ."]},
+{t:"1.6 Inverse Functions and Logarithms",q:"For positive numbers a and b, ln(ab) equals:",o:["ln a + ln b","ln a · ln b","ln a − ln b","(ln a) / (ln b)"],a:0,w:"The log of a product is the sum of the logs: ln(ab) = ln a + ln b.",x:["","Logs of a product add. They are not multiplied.","ln a − ln b equals ln(a/b), the log of a quotient.","(ln a)/(ln b) is the change-of-base form, not ln(ab)."]},
+{t:"1.6 Inverse Functions and Logarithms",q:"A function has an inverse function if it is one-to-one. Which test checks this on a graph?",o:["Horizontal line test","Vertical line test","Origin symmetry test","Intercept test"],a:0,w:"If every horizontal line meets the graph at most once, no two inputs share an output, so f is one-to-one.",x:["","The vertical line test checks whether a graph is a function at all.","Origin symmetry identifies odd functions.","Intercepts do not decide whether a function is invertible."]},
+{t:"1.6 Inverse Functions and Logarithms",q:"For x > 0, e^(ln x) equals:",o:["x","ln x","eˣ","1"],a:0,w:"eˣ and ln x are inverse functions, so applying eˣ to ln x gives back x.",x:["","ln x is the exponent. Applying eˣ undoes it and leaves x.","eˣ is a different function from e^(ln x).","The result is 1 only when x = 1."]},
+{t:"2.1 Rates of Change and Tangents",q:"What is the average rate of change of f(x) = x² over the interval [1, 3]?",o:["2","4","6","8"],a:1,w:"The average rate is (f(3) − f(1)) / (3 − 1) = (9 − 1) / 2 = 4.",x:["2 is the slope of the tangent at x = 1, not the average over [1, 3].","","6 is the slope of the tangent at x = 3, not the average.","8 is f(3) − f(1) without dividing by the interval length 2."]},
+{t:"2.1 Rates of Change and Tangents",q:"The slope of the tangent line at a point P on a curve is defined as:",o:["The limit of the slopes of secant lines PQ as Q approaches P","The slope of one secant line through P and any other point","The average of the slopes of all secant lines","The value of f(P) divided by x"],a:0,w:"As Q slides toward P, the secant slopes approach a single value. That limiting value is the tangent slope.",x:["","One secant gives only an average rate over an interval.","Averaging secants does not give the instantaneous rate at P.","f(P)/x is a ratio of values, not a slope."]},
+{t:"2.2 Limit of a Function and Limit Laws",q:"What is lim (x→2) (x² − 4)/(x − 2)?",o:["0","2","4","Does not exist"],a:2,w:"Factor: (x² − 4)/(x − 2) = (x − 2)(x + 2)/(x − 2) = x + 2 for x ≠ 2, which approaches 4.",x:["Substituting x = 2 gives 0/0, which is indeterminate, not 0.","The expression simplifies to x + 2, whose limit at 2 is 4, not 2.","","The limit exists. Factoring removes the zero in the denominator."]},
+{t:"2.2 Limit of a Function and Limit Laws",q:"If lim f(x) = 3 and lim g(x) = −2 as x → c, what is lim f(x)·g(x)?",o:["−6","1","5","−2/3"],a:0,w:"The Product Rule for limits gives 3 · (−2) = −6.",x:["","1 is the limit of f + g, not the product.","5 is the limit of f − g, not the product.","−2/3 is the limit of g/f, not the product."]},
+{t:"2.4 One-Sided Limits",q:"lim (x→c) f(x) = L exactly when:",o:["Both one-sided limits exist and equal L","f(c) = L","Only the right-hand limit equals L","f is defined at c"],a:0,w:"A two-sided limit exists only if the left-hand and right-hand limits both exist and are equal.",x:["","f(c) can differ from the limit, or not exist at all.","The left-hand limit must agree as well.","The limit does not depend on f being defined at c."]},
+{t:"2.5 Continuity",q:"Which of these is NOT required for f to be continuous at x = c?",o:["f(c) is defined","lim f(x) exists as x → c","lim f(x) = f(c) as x → c","f has a derivative at c"],a:3,w:"Continuity needs only the first three conditions. A derivative is not required: |x| is continuous at 0 but has no derivative there.",x:["Continuity requires f(c) to be defined.","Continuity requires the limit to exist.","Continuity requires the limit to equal f(c).",""]},
+{t:"2.6 Limits Involving Infinity",q:"What is lim (x→∞) (3x² + 1)/(x² − 5)?",o:["0","3","∞","−1/5"],a:1,w:"Divide the top and bottom by x²: (3 + 1/x²)/(1 − 5/x²) → 3/1 = 3.",x:["The limit would be 0 only if the denominator had the higher degree.","","The degrees are equal, so the limit is finite.","−1/5 comes from the constants, which matter only near x = 0."]},
+{t:"2.6 Asymptotes of Graphs",q:"The graph of f(x) = 1/(x − 2) has a vertical asymptote at:",o:["x = 2","x = 0","y = 2","x = −2"],a:0,w:"f is undefined at x = 2 and grows without bound near it, so x = 2 is a vertical asymptote.",x:["","The denominator is not zero at x = 0.","y = 2 is a horizontal line. The horizontal asymptote here is y = 0.","At x = −2 the denominator is −4, not 0."]},
+{t:"1.1 Functions and Their Graphs",q:"What is the domain of f(x) = 1/(x − 1)?",o:["All x except x = 1","All x except x = 0","All x > 1","All real numbers"],a:0,w:"Division by zero is undefined, and x − 1 = 0 when x = 1. Every other real number is allowed.",x:["","The denominator is zero at x = 1, not at x = 0.","x < 1 is also allowed. For example, x = 0 gives −1.","x = 1 makes the denominator 0, so it must be excluded."]},
+{t:"1.1 Functions and Their Graphs",q:"Let f(x) = x + 1 for x < 0 and f(x) = x² for x ≥ 0. What is f(−2) + f(3)?",o:["8","13","3","−1"],a:0,w:"Since −2 < 0, f(−2) = −2 + 1 = −1. Since 3 ≥ 0, f(3) = 9. The sum is 8.",x:["","13 uses x² for x = −2, but −2 < 0, so the rule x + 1 applies.","3 uses x + 1 for x = 3, but 3 ≥ 0, so the rule x² applies.","−1 is only f(−2). You still need to add f(3)."]},
+{t:"1.1 Functions and Their Graphs",q:"A function f is increasing on an interval if:",o:["f(x₂) > f(x₁) whenever x₂ > x₁","f(x₂) < f(x₁) whenever x₂ > x₁","f(x₂) = f(x₁) for all x₁ and x₂","f(x) > 0 on the interval"],a:0,w:"Increasing means the graph rises from left to right: larger inputs give larger outputs.",x:["","That describes a decreasing function.","That describes a constant function.","Positive values do not make a function increase. y = 1/x is positive but decreasing for x > 0."]},
+{t:"1.2 Combining Functions",q:"What is the domain of f(x) + g(x) if f(x) = √x and g(x) = √(1 − x)?",o:["[0, 1]","[0, ∞)","(−∞, 1]","All real numbers"],a:0,w:"The sum is defined only where both are: x ≥ 0 for f and x ≤ 1 for g, so 0 ≤ x ≤ 1.",x:["","[0, ∞) is the domain of f alone. g also needs x ≤ 1.","(−∞, 1] is the domain of g alone. f also needs x ≥ 0.","Both roots restrict x, so the sum is not defined for all real numbers."]},
+{t:"1.2 Shifting and Scaling Graphs",q:"The graph of y = −f(x) is the graph of y = f(x):",o:["Reflected across the x-axis","Reflected across the y-axis","Shifted down 1 unit","Stretched vertically by 2"],a:0,w:"Multiplying the output by −1 flips every point above or below the x-axis.",x:["","Reflecting across the y-axis is y = f(−x).","Shifting down 1 unit is y = f(x) − 1.","Stretching vertically by 2 is y = 2f(x)."]},
+{t:"1.2 Shifting and Scaling Graphs",q:"Compared with y = f(x), the graph of y = f(2x) is:",o:["Compressed horizontally by a factor of 2","Stretched horizontally by a factor of 2","Compressed vertically by a factor of 2","Shifted left 2 units"],a:0,w:"Multiplying x by c > 1 inside the function compresses the graph horizontally by the factor c.",x:["","Stretching horizontally by 2 is y = f(x/2).","Vertical scaling changes the output, as in y = f(x)/2.","A shift would be f(x + 2), not f(2x)."]},
+{t:"1.3 Trigonometric Functions",q:"What is sin(π/6)?",o:["1/2","√3/2","√2/2","1"],a:0,w:"The 30° (π/6) angle in the 30-60-90 triangle has sine 1/2.",x:["","√3/2 is sin(π/3), which is cos(π/6).","√2/2 is sin(π/4).","sin(π/2) = 1, not sin(π/6)."]},
+{t:"1.3 Trigonometric Functions",q:"tan θ equals:",o:["sin θ / cos θ","cos θ / sin θ","1 / sin θ","sin θ · cos θ"],a:0,w:"By definition, tan θ = sin θ / cos θ.",x:["","That is cot θ.","That is csc θ.","The product sin θ · cos θ is not tan θ."]},
+{t:"1.3 Trigonometric Functions",q:"In a triangle with sides a, b, c and angle C opposite c, the Law of Cosines states:",o:["c² = a² + b² − 2ab cos C","c² = a² + b² + 2ab cos C","c = a + b − cos C","c² = a² − b² − 2ab cos C"],a:0,w:"The Law of Cosines is c² = a² + b² − 2ab cos C. When C = 90°, the cosine term vanishes and it reduces to the Pythagorean theorem.",x:["","The sign of the cosine term is negative, not positive.","The formula involves squares of the sides, not a simple sum.","Both a² and b² are added."]},
+{t:"1.5 Exponential Functions",q:"Which of these is an exponential function?",o:["f(x) = 3ˣ","f(x) = x³","f(x) = 3x","f(x) = x + 3"],a:0,w:"An exponential function has the variable in the exponent: f(x) = aˣ.",x:["","x³ is a power function, with the variable in the base.","3x is linear.","x + 3 is linear."]},
+{t:"1.5 Exponential Functions",q:"For a > 1, the graph of y = aˣ always passes through the point:",o:["(0, 1)","(1, 0)","(0, 0)","(1, 1)"],a:0,w:"Since a⁰ = 1 for any a > 0, every such graph passes through (0, 1).",x:["","(1, 0) lies on a logarithm graph, not on y = aˣ.","aˣ is never 0, so (0, 0) is not on the graph.","a¹ = a, which equals 1 only if a = 1."]},
+{t:"1.5 Exponential Functions",q:"As x → −∞, 2ˣ approaches:",o:["0","−∞","1","∞"],a:0,w:"For large negative x, 2ˣ = 1/2^|x|, which gets closer and closer to 0.",x:["","2ˣ is always positive, so it cannot approach −∞.","2ˣ equals 1 only at x = 0.","2ˣ → ∞ as x → +∞, not −∞."]},
+{t:"1.6 Inverse Functions and Logarithms",q:"What is ln(e²)?",o:["2","e","e²","1/2"],a:0,w:"ln and eˣ are inverses, so ln(e²) = 2.",x:["","ln e = 1, not ln e². The exponent is 2.","ln undoes the exponential, so the result is the exponent 2, not e².","1/2 would be ln √e."]},
+{t:"1.6 Inverse Functions and Logarithms",q:"What is the inverse of f(x) = 2x + 6?",o:["f⁻¹(x) = (x − 6)/2","f⁻¹(x) = 2x − 6","f⁻¹(x) = (x + 6)/2","f⁻¹(x) = 1/(2x + 6)"],a:0,w:"Solve y = 2x + 6 for x: x = (y − 6)/2. Swapping the variables gives f⁻¹(x) = (x − 6)/2.",x:["","2x − 6 fails the check: f(2x − 6) = 4x − 6, not x.","(x + 6)/2 fails the check: f((x + 6)/2) = x + 12, not x.","1/(2x + 6) is the reciprocal, not the inverse."]},
+{t:"1.6 Inverse Functions and Logarithms",q:"The graph of f⁻¹ is the reflection of the graph of f across:",o:["The line y = x","The x-axis","The y-axis","The origin"],a:0,w:"Inverting swaps inputs and outputs, so each point (a, b) becomes (b, a), a reflection across y = x.",x:["","Reflecting across the x-axis gives −f(x), not the inverse.","Reflecting across the y-axis gives f(−x).","Reflecting through the origin gives −f(−x)."]},
+{t:"2.1 Rates of Change and Tangents",q:"The instantaneous rate of change of f at x = a is:",o:["The limit of the average rates over shrinking intervals","The average rate over [0, a]","f(a)/a","The slope of the secant through (0, 0) and (a, f(a))"],a:0,w:"Average rates over smaller and smaller intervals around a approach the instantaneous rate.",x:["","[0, a] is one fixed interval, which gives an average.","f(a)/a is a ratio of values, not a rate of change.","That is one secant slope. A limit is needed for the instantaneous rate."]},
+{t:"2.1 Rates of Change and Tangents",q:"What is the slope of the tangent to y = x² at the point (1, 1)?",o:["2","1","0","3"],a:0,w:"The secant slope from x = 1 to 1 + h is ((1 + h)² − 1)/h = 2 + h, which approaches 2 as h → 0.",x:["","1 is the y-value at x = 1, not the slope.","A slope of 0 would be a horizontal tangent, which happens at x = 0.","3 is the slope of the secant over [1, 2], not the tangent."]},
+{t:"2.2 Limit of a Function and Limit Laws",q:"What is lim (x→3) (x² + 2x)?",o:["15","9","6","Does not exist"],a:0,w:"Polynomials are continuous, so substitute x = 3: 9 + 6 = 15.",x:["","9 is x² alone.","6 is 2x alone.","Polynomials have limits everywhere. Substituting x = 3 works."]},
+{t:"2.2 Limit of a Function and Limit Laws",q:"What is lim (x→0) sin x / x (x in radians)?",o:["1","0","∞","Does not exist"],a:0,w:"This is a standard limit: sin x / x approaches 1 as x → 0 when x is measured in radians.",x:["","The form is 0/0, which is indeterminate. The limit is not simply 0.","The ratio stays bounded near 0, so it does not go to infinity.","The limit does exist, and it equals 1."]},
+{t:"2.2 Limit of a Function and Limit Laws",q:"If g(x) ≤ f(x) ≤ h(x) near c and lim g(x) = lim h(x) = L as x → c, then:",o:["lim f(x) = L","lim f(x) = 0","f(c) = L","lim f(x) does not exist"],a:0,w:"This is the Sandwich (Squeeze) Theorem: f is trapped between two functions with the same limit L, so it has limit L too.",x:["","The limit is L, which need not be 0.","The theorem gives the limit, not the value f(c).","The squeeze guarantees that the limit exists."]},
+{t:"2.2 Limit of a Function and Limit Laws",q:"What is lim (x→4) (√x − 2)/(x − 4)?",o:["1/4","0","1/2","4"],a:0,w:"Multiply by the conjugate: (x − 4)/((x − 4)(√x + 2)) = 1/(√x + 2), which approaches 1/4.",x:["","The form is 0/0, which is indeterminate. The limit is not 0.","1/2 would result if the denominator became √x alone. It is √x + 2, which tends to 4.","4 is the reciprocal of the correct answer."]},
+{t:"2.3 The Precise Definition of a Limit",q:"lim f(x) = L as x → c means: for every ε > 0 there is a δ > 0 such that:",o:["0 < |x − c| < δ implies |f(x) − L| < ε","|x − c| < ε implies |f(x) − L| < δ","|f(x) − L| < δ implies |x − c| < ε","x = c implies f(x) = L"],a:0,w:"Keeping x within δ of c (but not equal to c) forces f(x) to stay within ε of L.",x:["","ε and δ are swapped. ε bounds the output and δ bounds the input.","The implication runs backward.","The limit ignores the value at c, which is why 0 < |x − c| is required."]},
+{t:"2.3 The Precise Definition of a Limit",q:"In the ε–δ definition of a limit, ε is a tolerance on how close:",o:["f(x) must be to L","x must be to c","L must be to c","δ must be to 0"],a:0,w:"ε is the allowed error in the output. δ is then found to control the input.",x:["","δ controls how close x must be to c.","L and c are different kinds of quantities, an output and an input.","ε is a tolerance on the output, not on δ."]},
+{t:"2.3 The Precise Definition of a Limit",q:"For f(x) = 2x + 1 with c = 3 and L = 7, which δ works for a given ε?",o:["δ = ε/2","δ = 2ε","δ = ε + 2","δ = ε²"],a:0,w:"|f(x) − 7| = 2|x − 3|. For this to be less than ε, we need |x − 3| < ε/2.",x:["","With δ = 2ε, |f(x) − 7| can reach 4ε, which exceeds ε.","ε + 2 does not shrink as ε shrinks.","δ = ε² fails for large ε. If ε = 2, δ = 4 allows errors up to 8."]},
+{t:"2.4 One-Sided Limits",q:"What is lim (x→0⁺) |x|/x?",o:["1","−1","0","Does not exist"],a:0,w:"For x > 0, |x| = x, so |x|/x = 1 for every positive x.",x:["","−1 is the left-hand limit, where |x| = −x.","The ratio equals 1 exactly, not 0.","The right-hand limit exists. It is the two-sided limit that fails."]},
+{t:"2.4 One-Sided Limits",q:"What is lim (x→0) |x|/x?",o:["Does not exist","1","−1","0"],a:0,w:"The right-hand limit is 1 and the left-hand limit is −1. They differ, so the two-sided limit does not exist.",x:["","1 is only the right-hand limit.","−1 is only the left-hand limit.","The one-sided limits are 1 and −1, neither of them 0."]},
+{t:"2.4 One-Sided Limits",q:"Let ⌊x⌋ be the greatest integer function. What is lim (x→2⁻) ⌊x⌋?",o:["1","2","0","Does not exist"],a:0,w:"For x just below 2, such as 1.99, ⌊x⌋ = 1, so the left-hand limit is 1.",x:["","2 is the value at x = 2 and the right-hand limit.","Values just below 2 have floor 1, not 0.","The left-hand limit exists. It is the two-sided limit at 2 that fails."]},
+{t:"2.5 Continuity",q:"Which function is continuous at every real number?",o:["f(x) = x² + 1","f(x) = 1/x","f(x) = ⌊x⌋","f(x) = |x|/x"],a:0,w:"Polynomials are continuous everywhere.",x:["","1/x is undefined at x = 0.","The greatest integer function jumps at every integer.","|x|/x is undefined at 0 and jumps there."]},
+{t:"2.5 Continuity",q:"f(x) = (x² − 1)/(x − 1) is undefined at x = 1. What kind of discontinuity is that?",o:["Removable","Jump","Infinite","Oscillating"],a:0,w:"For x ≠ 1, f(x) = x + 1, so the limit at 1 is 2. Defining f(1) = 2 would remove the discontinuity.",x:["","A jump needs unequal one-sided limits. Here both equal 2.","An infinite discontinuity needs values that blow up. Here they approach 2.","The values settle at 2, so they do not oscillate."]},
+{t:"2.5 Continuity",q:"The Intermediate Value Theorem says a function continuous on [a, b] takes every value between:",o:["f(a) and f(b)","a and b","0 and f(b)","f(a) and f′(a)"],a:0,w:"The theorem is about outputs: a continuous graph cannot skip any y-value between f(a) and f(b).",x:["","a and b are inputs. The theorem is about output values.","The interval of outputs starts at f(a), not necessarily at 0.","Derivatives are not part of the theorem."]},
+{t:"2.5 Continuity",q:"For f(x) = x³ + x − 1 on [0, 1], the Intermediate Value Theorem guarantees:",o:["A root in (0, 1)","No root","Exactly two roots","A root only at x = 0"],a:0,w:"f(0) = −1 < 0 and f(1) = 1 > 0. Since f is continuous, it must cross 0 somewhere in (0, 1).",x:["","f(0) = −1 and f(1) = 1 have opposite signs, so a root must exist.","The theorem guarantees at least one root, not two.","f(0) = −1, so x = 0 is not a root."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What is lim (x→∞) (2x + 1)/(x² + 3)?",o:["0","2","∞","1/3"],a:0,w:"The denominator has the higher degree, so it dominates and the ratio tends to 0.",x:["","2 would need equal degrees, such as 2x²/x².","The denominator grows faster, so the ratio does not blow up.","1/3 is f(0), not the limit at infinity."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What is lim (x→0⁺) 1/x?",o:["∞","0","−∞","1"],a:0,w:"As x shrinks toward 0 through positive values, 1/x grows without bound.",x:["","0 is the limit as x → ∞.","−∞ is the limit as x → 0⁻.","1/x grows without bound. It does not settle at 1."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What is lim (x→0) 1/x²?",o:["∞","−∞","0","1"],a:0,w:"1/x² is positive and grows without bound as x approaches 0 from either side.",x:["","1/x² is positive, so it cannot head to −∞.","1/x² gets large near 0, not small.","It does not level off at 1."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What is the horizontal asymptote of y = (5x² + 8x − 3)/(3x² + 2)?",o:["y = 5/3","y = 5","y = 0","y = 8/3"],a:0,w:"The degrees are equal, so the limit at ±∞ is the ratio of leading coefficients: 5/3.",x:["","5 is only the numerator’s leading coefficient.","y = 0 would need a higher-degree denominator.","8/3 mixes in the x-term, which does not matter at infinity."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What is the oblique (slant) asymptote of y = (x² + 1)/(x − 1)?",o:["y = x + 1","y = x","y = x − 1","y = 1"],a:0,w:"Dividing gives (x² + 1)/(x − 1) = x + 1 + 2/(x − 1). The last term vanishes at infinity, leaving y = x + 1.",x:["","y = x drops the +1 from the division.","y = x − 1 has the wrong sign.","y = 1 is horizontal. The numerator’s degree is one more than the denominator’s, so the asymptote is slanted."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What is lim (x→∞) √(x² + 1) / x?",o:["1","0","∞","−1"],a:0,w:"For large x, √(x² + 1) ≈ x, so the ratio approaches 1. (As x → −∞ the limit would be −1.)",x:["","The numerator is about x, so the ratio is about 1, not 0.","The numerator grows like x, not faster, so the ratio stays finite.","−1 is the limit as x → −∞. For x → +∞ the ratio is positive."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"What are the vertical asymptotes of y = (x + 1)/(x² − 4)?",o:["x = 2 and x = −2","x = −1 only","x = 4 and x = −4","y = 0"],a:0,w:"The denominator x² − 4 = 0 at x = ±2, and the numerator is not zero there, so the function blows up at both.",x:["","x = −1 is a zero of the numerator, not the denominator.","The denominator x² − 4 equals 0 at x = ±2, not ±4.","y = 0 is the horizontal asymptote, not a vertical one."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"As |x| → ∞, the function f(x) = 4x³ − x + 2 behaves like:",o:["4x³","−x","2","4x"],a:0,w:"For large |x|, the highest-power term dominates, so f(x) behaves like 4x³.",x:["","−x is a lower-order term.","2 is the constant term, the least important at infinity.","4x lacks the cube, so it grows too slowly."]},
+{t:"2.6 Limits Involving Infinity; Asymptotes",q:"The line x = a is a vertical asymptote of y = f(x) if:",o:["lim f(x) = ±∞ as x → a⁺ or as x → a⁻","f(a) = 0","lim f(x) = a as x → ∞","f is undefined at a"],a:0,w:"This is the definition: f(x) grows without bound in magnitude as x approaches a from at least one side.",x:["","A zero of f is an x-intercept, not an asymptote.","That describes a limit at infinity, which leads to horizontal asymptotes.","An undefined point can be a removable hole, like (x² − 1)/(x − 1) at x = 1."]}
+];
+var LS={"1.1":"Functions and Their Graphs","1.2":"Combining Functions; Shifting and Scaling Graphs","1.3":"Trigonometric Functions","1.5":"Exponential Functions","1.6":"Inverse Functions and Logarithms","2.1":"Rates of Change and Tangents","2.2":"Limit of a Function and Limit Laws","2.3":"The Precise Definition of a Limit","2.4":"One-Sided Limits","2.5":"Continuity","2.6":"Limits Involving Infinity; Asymptotes"};
+Q.forEach(function(q,i){q.i=i;q.l=q.t.split(" ")[0]});
+var L="ABCD",S=[],cnt=20,left=0,TOTAL=0,timer=null,done=false,keyOn=false;
+var $=function(id){return document.getElementById(id)};
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function pool(){var on=[];document.querySelectorAll("#lessons input:checked").forEach(function(c){on.push(c.value)});return Q.filter(function(q){return on.indexOf(q.l)>=0})}
+function buildSetup(){
+  var h="";
+  Object.keys(LS).forEach(function(k){var n=Q.filter(function(q){return q.l===k}).length;
+    h+='<label class="lesson"><input type="checkbox" value="'+k+'" checked><span><b>'+k+'</b> '+LS[k]+'</span><em>'+n+' Q</em></label>'});
+  $("lessons").innerHTML=h;
+  var c="";[10,20,30,40,50,60].forEach(function(n){c+='<button type="button" class="chip" data-n="'+n+'">'+n+'</button>'});
+  $("cnts").innerHTML=c+'<button type="button" class="chip" data-n="all">All</button>';
+  refresh();
+}
+function refresh(){
+  var n=pool().length;
+  if(cnt!=="all"&&cnt>n)cnt="all";
+  document.querySelectorAll("#cnts .chip").forEach(function(b){
+    var v=b.dataset.n==="all"?"all":+b.dataset.n;
+    b.disabled=v!=="all"&&v>n;b.setAttribute("aria-pressed",String(v===cnt));
+  });
+  var take=cnt==="all"?n:Math.min(cnt,n);
+  $("avail").textContent=n+" questions available · this test will have "+take;
+  $("go").disabled=n===0;
+}
+function build(){
+  var h="";
+  S.forEach(function(x,i){
+    h+='<fieldset class="q" id="q'+i+'"><legend><span class="n">'+(i+1)+'.</span>'+x.q+'<small>'+x.t+'</small></legend><div class="opts">';
+    x.o.forEach(function(o,j){h+='<label class="opt" id="o'+i+'_'+j+'"><input type="radio" name="q'+i+'" value="'+j+'"><b>'+L[j]+')</b><span>'+o+'</span></label>'});
+    h+='</div><p class="why" id="w'+i+'"></p></fieldset>';
+  });
+  $("qs").innerHTML=h;
+}
+function picked(i){var r=document.querySelector('input[name="q'+i+'"]:checked');return r?+r.value:-1}
+function count(){var n=0;S.forEach(function(_,i){if(picked(i)>=0)n++});$("prog").textContent="Answered "+n+" / "+S.length;return n}
+function fmt(s){var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r}
+function tick(){left--;$("clock").textContent=fmt(Math.max(left,0));$("clock").className=left<=300?"low":"";if(left<=0)finish()}
+function mark(){
+  S.forEach(function(x,i){
+    var p=picked(i),w=$("w"+i),c="why",h="";
+    for(var j=0;j<4;j++){var el=$("o"+i+"_"+j);el.classList.remove("right","wrong");
+      if(j===x.a&&(done||keyOn))el.classList.add("right");
+      if(done&&j===p&&p!==x.a)el.classList.add("wrong");}
+    var key='<span><strong>Correct answer: '+L[x.a]+') '+x.o[x.a]+'.</strong> '+x.w+'</span>';
+    if(done){
+      if(p===x.a){h='<span><strong>✓ Correct.</strong> You chose '+L[p]+') '+x.o[p]+'.</span><span>'+x.w+'</span>'}
+      else if(p<0){c+=" miss";h='<span><strong>Not answered.</strong></span>'+key}
+      else{c+=" bad";h='<span><strong>✗ Wrong.</strong> You chose '+L[p]+') '+x.o[p]+'. '+x.x[p]+'</span>'+key}
+    }else{h=key}
+    w.className=c;w.innerHTML=h;
+  });
+  $("sheet").classList.toggle("show",done||keyOn);
+}
+function finish(){
+  if(done)return;done=true;clearInterval(timer);
+  var s=0;S.forEach(function(x,i){if(picked(i)===x.a)s++});
+  var N=S.length,pct=Math.round(s/N*100),n=count();
+  var g=pct>=91?"Excellent":pct>=71?"Good":pct>=51?"Pass":"Needs more study";
+  var nm=$("nm").value.trim();
+  $("result").style.display="block";
+  $("result").innerHTML='<p class="score">'+s+' / '+N+'</p><p><strong>'+pct+'%</strong> · '+g+'</p><p>'+(nm?nm+' · ':'')+n+' answered, '+(N-n)+' left blank. Review each answer below.</p>';
+  document.querySelectorAll("#exam input").forEach(function(i){i.disabled=true});
+  $("submit").disabled=true;mark();
+  $("result").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function begin(){
+  var p=pool(),n=cnt==="all"?p.length:Math.min(cnt,p.length);
+  var pick=shuf(p.slice()).slice(0,n);
+  if(!$("shq").checked)pick.sort(function(a,b){return a.i-b.i});
+  S=pick.map(function(q){
+    var perm=[0,1,2,3];if($("sha").checked)shuf(perm);
+    return {t:q.t,q:q.q,w:q.w,o:perm.map(function(k){return q.o[k]}),x:perm.map(function(k){return q.x[k]}),a:perm.indexOf(q.a)};
+  });
+  done=false;keyOn=false;TOTAL=S.length*120;left=TOTAL;clearInterval(timer);
+  build();$("setup").hidden=true;$("examwrap").hidden=false;
+  $("result").style.display="none";$("submit").disabled=false;
+  $("keybtn").textContent="Show answer key";$("keybtn").setAttribute("aria-pressed","false");
+  $("clock").textContent=fmt(TOTAL);$("clock").className="";count();mark();
+  timer=setInterval(tick,1000);window.scrollTo(0,0);
+}
+function toSetup(){clearInterval(timer);$("examwrap").hidden=true;$("setup").hidden=false;window.scrollTo(0,0)}
+$("lessons").addEventListener("change",refresh);
+$("cnts").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b||b.disabled)return;cnt=b.dataset.n==="all"?"all":+b.dataset.n;refresh()});
+$("all").addEventListener("click",function(){document.querySelectorAll("#lessons input").forEach(function(c){c.checked=true});refresh()});
+$("none").addEventListener("click",function(){document.querySelectorAll("#lessons input").forEach(function(c){c.checked=false});refresh()});
+$("go").addEventListener("click",begin);
+$("exam").addEventListener("change",count);
+$("submit").addEventListener("click",function(){
+  var n=count();
+  if(n<S.length&&!confirm("You have "+(S.length-n)+" unanswered question(s). Submit anyway?"))return;
+  finish();
+});
+$("reset").addEventListener("click",function(){if(!done&&!confirm("Leave this test and go back to setup? Your answers will be lost."))return;toSetup()});
+$("keybtn").addEventListener("click",function(){
+  keyOn=!keyOn;this.textContent=keyOn?"Hide answer key":"Show answer key";this.setAttribute("aria-pressed",keyOn);mark();
+});
+buildSetup();
+</script>
+</body>
+</html>
